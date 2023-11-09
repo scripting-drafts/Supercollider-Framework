@@ -4,7 +4,6 @@ from sc3f import Synths_MGMT
 from sc3.all import Synth, synthdef, SinOsc, EnvGen, Env, Out
 import numpy as np
 
-
 harmonics = [1, 2, 4, 6, 8, 10]
 freq_eq = [np.linspace(0, 20000, 0.1), np.array(np.linspace(0, 1, 0.001))]
 
