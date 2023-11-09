@@ -1,0 +1,24 @@
+sc3 setupy
+Specify supercollider path at ->
+C:\Users\creat\AppData\Local\Programs\Python\Python39\Lib\site-packages\sc3\base\platform.py
+
+Specify supercollider plugins path at ->
+C:\Users\creat\AppData\Local\Programs\Python\Python39\Lib\site-packages\sc3\synth\server.py -> UGEN_PLUGINS_PATH
+
+Comment break in method def _udp_run(self) exception ->
+C:\Users\creat\AppData\Local\Programs\Python\Python39\Lib\site-packages\sc3\base\_oscinterface.py
+
+Add Filters and OSCs from plugins at ->
+FILTERS: C:\Users\creat\AppData\Local\Programs\Python\Python39\Lib\site-packages\sc3\synth\ugens\filter.py
+OSCILLATORS: C:\Users\creat\AppData\Local\Programs\Python\Python39\Lib\site-packages\sc3\synth\ugens\oscillators.py
+
+i.e. at FILTERS
+
+class LPF18(Filter):
+    @classmethod
+    def ar(cls, input=0.0, freq=440.0, res=1.0, q=90.0):
+        return cls._multi_new('audio', input, freq, res, q)
+
+    @classmethod
+    def kr(cls, input=0.0, freq=440.0, res=1.0, q=90.0):
+        return cls._multi_new('control', input, freq, res, q)
