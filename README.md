@@ -2,7 +2,7 @@
 
 boot server
 s.boot
-
+asd
 SinOsc: Sinusoidal Oscilator  
 ar: generate audio signal  
 kr: generate control signal  
