@@ -1,13 +1,12 @@
 from cmath import pi
 from time import sleep
 from sc3.all import *
-# from sc3.all import SinOsc, EnvGen, Out
+from sc3.all import SinOsc, EnvGen, Out
 
 # s.quit()
 # s.free_nodes()
-s.boot()
-s.dump_tree(True)
-
+# s.boot()
+# s.dump_tree(True)
 # sleep(10)
 
 @synthdef
@@ -50,4 +49,4 @@ x = Synth("sine")
 
 x.release()
 # s.free_nodes()
-s.quit()
+# s.quit()

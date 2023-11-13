@@ -11,7 +11,7 @@ while True:
             s = servers.server_boot()
             is_server_up = True
             synth_setup.set_synth()
-        time.sleep(30)
+        time.sleep(20)
     except KeyboardInterrupt:
         if is_server_up:
             servers.server_quit(s)

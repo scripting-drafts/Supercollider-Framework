@@ -1,23 +1,24 @@
 from math import pi
-from os import times
+# from os import times
 from subprocess import getoutput
-from threading import Thread
-from time import sleep
+# from threading import Thread
+# from time import sleep
 from sc3.all import *
+from sc3.all import SinOsc, EnvGen, Out, Mix, LPF18
 
-class ThreadR(Thread):
-    def __init__(self, group=None, target=None, name=None,
-                 args=(), kwargs={}, Verbose=None):
-        Thread.__init__(self, group, target, name, args, kwargs)
-        self._return = None
-    def run(self):
-        print(type(self._target))
-        if self._target is not None:
-            self._return = self._target(*self._args,
-                                                **self._kwargs)
-    def join(self, *args):
-        Thread.join(self, *args)
-        return self._return
+# class ThreadR(Thread):
+#     def __init__(self, group=None, target=None, name=None,
+#                  args=(), kwargs={}, Verbose=None):
+#         Thread.__init__(self, group, target, name, args, kwargs)
+#         self._return = None
+#     def run(self):
+#         print(type(self._target))
+#         if self._target is not None:
+#             self._return = self._target(*self._args,
+#                                                 **self._kwargs)
+#     def join(self, *args):
+#         Thread.join(self, *args)
+#         return self._return
 
 class Server_MGMT():
     def server_boot(self):
@@ -40,7 +41,7 @@ class Synths_MGMT():
             Out(0, (sig * env).dup())
 
         @synthdef
-        def reso(freq=293.6, amp=0.7, gate=1):
+        def reso(freq=293.6, amp=1, gate=1):
             '''
             Next steps:
              - Additive SinOsc's mix
@@ -79,14 +80,14 @@ class Synths_MGMT():
             waves = SinOsc(freq, phase=pi) * amp
             LPF_control = SinOsc.kr(freq * 10, phase=pi) * amp
             sig = LPF18(waves, LPF_control, 0.9, 90)
-            env = EnvGen(Env.adsr(), gate, done_action=2)
+            env = EnvGen(Env.adsr(0.01, 0.3, 1, 0.01, 1, 0.01), gate, done_action=2)
             # levels = [0.3, 0.7]
             # env = EnvGen(Env.cyclic(levels=levels, times=2), gate, done_action=2)
             Out(0, (sig * env).dup())
             # Out(0, sig.dup())
 
         @synthdef
-        def multi_reso(freq=36.71, amp=1, gate=1):
+        def ha_reso(freq=36.71, amp=1, gate=1):
             env = EnvGen(Env.adsr(), gate, done_action=2)
             harmonics = [2, 4, 6, 8, 10]
             amp = amp / len(harmonics)
@@ -95,17 +96,16 @@ class Synths_MGMT():
             Out(0, (sig * env).dup())
 
         sine.dump_ugens()
-        return multi_reso
 
-    def start_synth(self, synth):
-        synth_name = str(synth.__getattribute__("name"))
-        synth = ThreadR(target=Synth, args=(synth_name,))
-        synth.start()
-        synth = synth.join()
-        return synth
+    # def start_synth(self, synth):
+    #     synth_name = str(synth.__getattribute__("name"))
+    #     synth = ThreadR(target=Synth, args=(synth_name,))
+    #     synth.start()
+    #     synth = synth.join()
+    #     return synth
     
-    def stop_synth(self, synth):
-        # synth = synth.join()
-        synth_stop_thread = Thread(target=synth.release)
-        synth_stop_thread.start()
-        synth_stop_thread.join()
+    # def stop_synth(self, synth):
+    #     # synth = synth.join()
+    #     synth_stop_thread = Thread(target=synth.release)
+    #     synth_stop_thread.start()
+    #     synth_stop_thread.join()

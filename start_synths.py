@@ -1,14 +1,14 @@
 from time import sleep
 # from sc3f import server_boot, server_quit, set_synth, start_synth, stop_synth
-from sc3f import Synths_MGMT
-from sc3.all import Synth, synthdef, SinOsc, EnvGen, Env, Out
-import numpy as np
+# from sc3f import Synths_MGMT
+from sc3.all import Synth   #, synthdef, SinOsc, EnvGen, Env, Out
+# import numpy as np
 
-harmonics = [1, 2, 4, 6, 8, 10]
-freq_eq = [np.linspace(0, 20000, 0.1), np.array(np.linspace(0, 1, 0.001))]
+# harmonics = [1, 2, 4, 6, 8, 10]
+# # freq_eq = [np.linspace(0, 20000, 0.1), np.array(np.linspace(0, 1, 0.001))]
 
-freq_eq = np.zeros((20000), 0.001)
-print(freq_eq)
+# freq_eq = np.zeros((20000), 0.001)
+# print(freq_eq)
 
 # freq = [x for x in range(0., freq, 0.1)]
 
@@ -18,8 +18,6 @@ print(freq_eq)
 #     "sin_osc": SinOSC(),
 #     "sync_saw": SyncSaw()
 # }
-
-
 
 # eq = {
 #     "low_cut_LOW" : freq[0],
@@ -36,11 +34,11 @@ print(freq_eq)
 #     "top_cut": freq[-1]
 # }
 
-
-
-n = [Synth('reso', f, 1 / len(freq_eq[0])) for f, e in freq_eq.tolist()]
+# n = [Synth('reso', f, 1 / len(freq_eq[0])) for f, e in freq_eq.tolist()]
 # n.set('amp', 0.05)
 # n.set('freq', 550)
+
+n = Synth('ha_reso')
 sleep(10)
 
 n.release()
