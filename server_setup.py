@@ -10,7 +10,7 @@ while True:
         if not is_server_up:
             s = servers.server_boot()
             is_server_up = True
-            synth_setup.set_synth()
+            synth_setup.synths_init()
         time.sleep(20)
     except KeyboardInterrupt:
         if is_server_up:

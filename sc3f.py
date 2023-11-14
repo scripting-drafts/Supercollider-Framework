@@ -33,7 +33,14 @@ class Server_MGMT():
         print(server_kill)
 
 class Synths_MGMT():
-    def set_synth(self):
+    def synths_init(self, stellar_classes=None, temperatures=None, luminosity=None):
+
+        @synthdef(stellar_classes=stellar_classes, temperatures=temperatures, luminosity=luminosity)
+        def sine(freq=440, amp=1, gate=1):
+            sig = SinOsc(freq) * amp
+            env = EnvGen(Env.adsr(), gate, done_action=2)
+            Out(0, (sig * env).dup())
+
         @synthdef
         def sine(freq=440, amp=1, gate=1):
             sig = SinOsc(freq) * amp
