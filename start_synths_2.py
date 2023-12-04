@@ -1,7 +1,7 @@
 # from time import sleep
 from math import pi
 # from sc3f import server_boot, server_quit, set_synth, start_synth, stop_synth
-from sc3.all import SinOsc, EnvGen, Out, SinOsc, EnvGen, Env, Out, Mix, play
+from sc3.all import SinOsc, EnvGen, Out, SinOsc, EnvGen, Env, Out, Mix, play, LPF18, LPF_control
 
 # @synthdef
 # def sig_reso(freq=36.71, amp=1):

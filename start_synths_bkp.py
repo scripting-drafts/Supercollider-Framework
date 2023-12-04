@@ -2,6 +2,15 @@ from time import sleep
 # from sc3f import server_boot, server_quit, set_synth, start_synth, stop_synth
 # from sc3f import Synths_MGMT
 from sc3.all import Synth   #, synthdef, SinOsc, EnvGen, Env, Out
+# from importlib import import_module
+# from pathlib import Path
+# import os
+# ThreadS = os.path.abspath(r'../scripts/ThreadS.py')
+# print(ThreadS)
+# ThreadS = import_module(ThreadS)
+from scripts import ThreadS
+# from ThreadS import ThreadS
+
 # import numpy as np
 
 # harmonics = [1, 2, 4, 6, 8, 10]
@@ -38,10 +47,20 @@ from sc3.all import Synth   #, synthdef, SinOsc, EnvGen, Env, Out
 # n.set('amp', 0.05)
 # n.set('freq', 550)
 
-n = Synth('ha_reso')
-sleep(10)
 
-n.release()
+sleep(1)
+
+# Ascencion
+freq=36.71
+harmonics = [2, 4, 6, 8, 10, 12, 14]
+synths = [ThreadS(target=Synth, args=('ha_reso', freq*h, 1/len(harmonics))) for h in harmonics]
+[t.start() for t in synths]
+sleep(1)
+synths = [t.join() for t in synths]
+[n.release() for n in synths]
+
+
+# n.release()
 # synths = Synths_MGMT()
 # synth_name = synths.set_synth()
 # synth = synths.start_synth(synth_name)

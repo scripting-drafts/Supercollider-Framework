@@ -35,11 +35,11 @@ class Server_MGMT():
 class Synths_MGMT():
     def synths_init(self, stellar_classes=None, temperatures=None, luminosity=None):
 
-        @synthdef(stellar_classes=stellar_classes, temperatures=temperatures, luminosity=luminosity)
-        def sine(freq=440, amp=1, gate=1):
-            sig = SinOsc(freq) * amp
-            env = EnvGen(Env.adsr(), gate, done_action=2)
-            Out(0, (sig * env).dup())
+        # @synthdef(stellar_classes=stellar_classes, temperatures=temperatures, luminosity=luminosity)
+        # def sine(freq=440, amp=1, gate=1):
+        #     sig = SinOsc(freq) * amp
+        #     env = EnvGen(Env.adsr(), gate, done_action=2)
+        #     Out(0, (sig * env).dup())
 
         @synthdef
         def sine(freq=440, amp=1, gate=1):
@@ -98,8 +98,8 @@ class Synths_MGMT():
             env = EnvGen(Env.adsr(), gate, done_action=2)
             harmonics = [2, 4, 6, 8, 10]
             amp = amp / len(harmonics)
-            base_sigs = [SinOsc(freq * h, phase=pi) * amp for h in harmonics]
-            sig = Mix.new(base_sigs)
+            sigs = [SinOsc(freq * h, phase=pi) * amp for h in harmonics]
+            sig = Mix.new(sigs)
             Out(0, (sig * env).dup())
 
         sine.dump_ugens()
